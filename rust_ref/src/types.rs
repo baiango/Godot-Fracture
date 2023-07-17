@@ -22,8 +22,8 @@ impl RNG
 	pub fn set(mut self, num: u64) -> Self { self.0 = num; self }
 	pub fn lehmer(mut self) -> Self { self.0 = u64::wrapping_mul(self.0, 0xd1342543de82ef95); self }
 	pub fn get_u8(self) -> u8 { (self.0 >> (u64::BITS - 8)) as u8 }
-	pub fn get_u16(self) -> u16 { (self.0 >> (u16::BITS - 16)) as u16 }
-	pub fn get_u32(self) -> u32 { (self.0 >> (u32::BITS - 32)) as u32 } }
+	pub fn get_u16(self) -> u16 { (self.0 >> (u64::BITS - 16)) as u16 }
+	pub fn get_u32(self) -> u32 { (self.0 >> (u64::BITS - 32)) as u32 } }
 
 pub struct Vec2i { w: i32, h: i32 }
 impl Vec2i
