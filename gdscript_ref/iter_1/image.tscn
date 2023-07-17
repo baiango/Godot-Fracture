@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd4ymijo4yuuc"]
+
+[ext_resource type="Script" path="res://iter_1/canva.gd" id="1_bfvr7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dk03n"]
+seed = 145
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ghlmw"]
+noise = SubResource("FastNoiseLite_dk03n")
+
+[node name="world" type="Node2D"]
+
+[node name="test_noise" type="Sprite2D" parent="."]
+z_index = -1
+texture = SubResource("NoiseTexture2D_ghlmw")
+centered = false
+
+[node name="canva" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
+script = ExtResource("1_bfvr7")
+
+[connection signal="tree_exiting" from="canva" to="canva" method="_on_tree_exiting"]

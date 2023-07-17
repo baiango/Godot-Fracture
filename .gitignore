@@ -1,2 +1,3 @@
-/rust_ref/target
+rust_ref/target
 *.exe
+gdscript_ref/.godot/
