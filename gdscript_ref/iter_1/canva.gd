@@ -2,7 +2,7 @@
 extends Sprite2D
 var update_count = 0
 
-# Left (corner -> Scene -> Reload) Saved Scene to reload the script.
+# (Left corner -> Scene -> Reload) Saved Scene to reload the script.
 func _process(delta):
 	var time_sec = 3.0 # It depends on the viewport
 	# Way stable than "await get_tree().create_timer(5.0).timeout" But it's inaccurate.
