@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5hshsxfummgl"]
+[gd_scene load_steps=15 format=3 uid="uid://c5hshsxfummgl"]
 
 [ext_resource type="Material" uid="uid://crlkt56j8b1s7" path="res://res/color_grid.material" id="1_vc1mf"]
 [ext_resource type="Script" path="res://iter_1/camera.gd" id="1_wenw2"]
+[ext_resource type="Script" path="res://iter_1/lod1.gd" id="3_o3p46"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_swvl7"]
 size = Vector2(128, 128)
@@ -11,6 +12,7 @@ orientation = 1
 data = PackedVector3Array(64, 0, 64, -64, 0, 64, 64, 0, -64, -64, 0, 64, -64, 0, -64, 64, 0, -64)
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ihoib"]
+use_debanding = false
 
 [sub_resource type="Sky" id="Sky_j7oeo"]
 sky_material = SubResource("PhysicalSkyMaterial_ihoib")
@@ -25,6 +27,8 @@ radius = 0.3
 [sub_resource type="BoxMesh" id="BoxMesh_lxd4g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kc2sr"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_k7j3m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lpamu"]
 size = Vector3(1, 2, 1)
@@ -59,6 +63,7 @@ spring_length = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/h/v"]
 transform = Transform3D(1, 0, 0, 0, 0.90335, 0.428904, 0, -0.428904, 0.90335, 0, 0, 0)
+fov = 67.3801
 script = ExtResource("1_wenw2")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D/h/v/Camera3D"]
@@ -90,7 +95,14 @@ shape = SubResource("BoxShape3D_kc2sr")
 [node name="rect_box" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, -1.4)
 
+[node name="lod1" type="MeshInstance3D" parent="rect_box"]
+material_override = ExtResource("1_vc1mf")
+mesh = SubResource("QuadMesh_k7j3m")
+skeleton = NodePath("../MeshInstance3D")
+script = ExtResource("3_o3p46")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="rect_box"]
+visible = false
 material_override = ExtResource("1_vc1mf")
 mesh = SubResource("BoxMesh_lpamu")
 
