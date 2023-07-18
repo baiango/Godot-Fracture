@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5hshsxfummgl"]
+
+[ext_resource type="Material" uid="uid://crlkt56j8b1s7" path="res://res/color_grid.material" id="1_vc1mf"]
+[ext_resource type="Script" path="res://iter_1/camera.gd" id="1_wenw2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_swvl7"]
+size = Vector2(128, 128)
+orientation = 1
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_war44"]
+data = PackedVector3Array(64, 0, 64, -64, 0, 64, 64, 0, -64, -64, 0, 64, -64, 0, -64, 64, 0, -64)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ihoib"]
+
+[sub_resource type="Sky" id="Sky_j7oeo"]
+sky_material = SubResource("PhysicalSkyMaterial_ihoib")
+
+[sub_resource type="Environment" id="Environment_ghd54"]
+background_mode = 2
+sky = SubResource("Sky_j7oeo")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_crqk8"]
+radius = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_lxd4g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kc2sr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lpamu"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_74o8q"]
+size = Vector3(1, 2, 1)
+
+[node name="world" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_swvl7")
+surface_material_override/0 = ExtResource("1_vc1mf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_war44")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ghd54")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.513392, -0.739836, 0.434823, -0.47735, 0.667273, 0.571738, -0.713138, 0.0859623, -0.695733, 0, 3, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="h" type="Node3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 3)
+
+[node name="v" type="SpringArm3D" parent="Node3D/h"]
+spring_length = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/h/v"]
+transform = Transform3D(1, 0, 0, 0, 0.90335, 0.428904, 0, -0.428904, 0.90335, 0, 0, 0)
+script = ExtResource("1_wenw2")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Node3D/h/v/Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/h/v/Camera3D/CharacterBody3D"]
+shape = SubResource("SphereShape3D_crqk8")
+
+[node name="box" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="box"]
+material_override = ExtResource("1_vc1mf")
+mesh = SubResource("BoxMesh_lxd4g")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box"]
+shape = SubResource("BoxShape3D_kc2sr")
+
+[node name="box2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -0.4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="box2"]
+material_override = ExtResource("1_vc1mf")
+mesh = SubResource("BoxMesh_lxd4g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box2"]
+shape = SubResource("BoxShape3D_kc2sr")
+
+[node name="rect_box" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, -1.4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="rect_box"]
+material_override = ExtResource("1_vc1mf")
+mesh = SubResource("BoxMesh_lpamu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rect_box"]
+shape = SubResource("BoxShape3D_74o8q")
