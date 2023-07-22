@@ -45,7 +45,7 @@ impl Vec2u
 pub struct Vec3i { pub x: i32, pub y: i32, pub z: i32 }
 impl Vec3i
 {	pub fn new(x: i32, y: i32, z: i32) -> Vec3i { Vec3i{ x, y, z } }
-	pub fn expand_1d_to_3d(i: i32, row: i32, col: i32) -> Vec3i { Vec3i{ x: i % row, y: i / row, z: i / (row * col) } }
+	pub fn expand_1d_to_3d(i: i32, row: i32, col: i32) -> Vec3i { Vec3i{ x: i % row, y: i / row % col, z: i / (row * col) } }
 	pub fn flat_3d_to_1d(vec: Vec3i, row: i32, col: i32) -> i32 { vec.x + (vec.y * row) + (vec.z * row * col) } }
 
 
