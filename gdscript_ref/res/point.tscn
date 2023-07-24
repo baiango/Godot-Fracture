@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0s1sutq0iuam"]
+
+[ext_resource type="ArrayMesh" path="res://res/debug_point.res" id="1_i1dpq"]
+
+[node name="point" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = ExtResource("1_i1dpq")
+skeleton = NodePath("")

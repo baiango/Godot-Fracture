@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5hshsxfummgl"]
+[gd_scene load_steps=16 format=3 uid="uid://c5hshsxfummgl"]
 
 [ext_resource type="Material" uid="uid://crlkt56j8b1s7" path="res://res/color_grid.material" id="1_vc1mf"]
 [ext_resource type="Script" path="res://iter_1/camera.gd" id="1_wenw2"]
 [ext_resource type="Script" path="res://iter_1/lod1.gd" id="3_o3p46"]
+[ext_resource type="Script" path="res://iter_1/debug_point.gd" id="4_72euw"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_swvl7"]
 size = Vector2(128, 128)
@@ -108,3 +109,6 @@ mesh = SubResource("BoxMesh_lpamu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="rect_box"]
 shape = SubResource("BoxShape3D_74o8q")
+
+[node name="debug_point" type="MeshInstance3D" parent="rect_box"]
+script = ExtResource("4_72euw")
